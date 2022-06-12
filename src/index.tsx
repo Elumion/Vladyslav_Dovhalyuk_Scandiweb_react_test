@@ -2,41 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import {
-  ApolloClient,
-  ApolloProvider,
-  gql,
-  InMemoryCache,
-} from "@apollo/client";
-
-const client = new ApolloClient({
-  uri: "http://localhost:4000/",
-  cache: new InMemoryCache(),
-});
-
-// client
-//   .query({
-//     query: gql`
-//       query Categories {
-//         categories {
-//           name
-//           products {
-//             name
-//             id
-//           }
-//         }
-//       }
-//     `,
-//   })
-//   .then((res) => console.log(res));
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    <Provider store={store}>
       <App />
-    </ApolloProvider>
+    </Provider>
   </React.StrictMode>
 );
