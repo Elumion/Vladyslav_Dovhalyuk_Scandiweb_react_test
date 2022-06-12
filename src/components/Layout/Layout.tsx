@@ -1,35 +1,26 @@
 import React from "react";
 import { QUERY_CATEGORIES } from "./query";
+import { GQL_URL } from "../../constants";
+import { connect, useDispatch, useSelector } from "react-redux";
+import { store } from "../../redux/store";
+import { fetchCategories } from "../../redux/CategoriesReducer";
+
 type PropsLayout = { navsArray: string[] };
 
-export class Layout extends React.Component<any, any> {
+class Layout extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
   }
-  async componentWillMount() {
-    const axios = require("axios").default;
-    const query = {
-      operationName: "getCategories",
-      query: `query getCategories ${QUERY_CATEGORIES}`,
-      variables: {},
-    };
-    const s = await axios({
-      url: "http://localhost:4000/",
-      method: "get",
-      data: JSON.parse(JSON.stringify(query)),
-    });
-    // axios({
-    //   url: endpoint,
-    //   method: "post",
-    //   headers: headers,
-    //   data: graphqlQuery,
-    // });
-    console.log(s);
-  }
+
+  async componentWillMount() {}
 
   componentDidMount() {
-    this.setState({ data: 43 });
+    // this.setState({ data: 43 });
+    this.props.categoriesUpdate(QUERY_CATEGORIES);
+    console.log();
   }
+
+  componentWillUnmount() {}
 
   render(): React.ReactNode {
     console.log(this.state, "props: ", this.props);
@@ -40,3 +31,23 @@ export class Layout extends React.Component<any, any> {
     );
   }
 }
+
+//redux
+
+function mapStateToProps(state: any, ownProps: any) {
+  return {
+    categories: ownProps,
+    smth: state,
+  };
+}
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    categoriesUpdate: (query: string) => dispatch(fetchCategories(query)),
+  };
+}
+
+// const connectToStore = connect(mapStateToProps, mapDispatchToProps);
+// const connectedComponent = connectToStore(Layout);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
