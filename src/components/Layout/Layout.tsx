@@ -6,6 +6,7 @@ import { store } from "../../redux/store";
 import { fetchCategories } from "../../redux/CategoriesReducer";
 import { HeaderContainer } from "./Layout.styles";
 import { JsxElement } from "typescript";
+import { withRouter } from "react-router";
 
 type PropsLayout = { navsArray: string[] };
 
@@ -30,7 +31,7 @@ class Layout extends React.Component<any, any> {
   }
 
   render(): React.ReactNode {
-    console.log(this.state, "props: ", this.props);
+    console.log("props: ", this.props, "this", this);
     return (
       <>
         <HeaderContainer>
@@ -50,7 +51,7 @@ class Layout extends React.Component<any, any> {
             </div>
           </div>
         </HeaderContainer>
-        <div>{this.props.children}</div>;
+        <main className="container">{this.props.children}</main>;
       </>
     );
   }
@@ -69,4 +70,4 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Layout);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Layout));
