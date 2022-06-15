@@ -17,7 +17,7 @@ export const fetchCategories: any = createAsyncThunk<any>(
   }
 );
 
-const initialState = {data:'fwe'};
+const initialState = {};
 
 const categoriesSlice: any = createSlice<any, any, any>({
   name: "categories",
