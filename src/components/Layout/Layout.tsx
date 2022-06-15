@@ -8,6 +8,8 @@ import { HeaderContainer } from "./Layout.styles";
 import { JsxElement } from "typescript";
 import { withRouter } from "../../withRouter";
 import { Link } from "react-router-dom";
+import { fetchProducts } from "../../redux/ProductsReducer";
+import { QUERY_PRODUCTS } from "../../pages/ProductListing/query";
 
 type PropsLayout = { navsArray: string[] };
 
@@ -25,6 +27,13 @@ class Layout extends React.Component<any, any> {
     this.props.categoriesUpdate(QUERY_CATEGORIES);
   }
 
+  updateProducts() {
+    this.props.productsUpdate({
+      query: QUERY_PRODUCTS,
+      name: this.props.params.categoryName,
+    });
+  }
+
   componentWillUnmount() {}
 
   renderItems(listArr: { name: string }[]) {
@@ -34,6 +43,7 @@ class Layout extends React.Component<any, any> {
           el.name === this.props.params.categoryName ? "active__url" : ""
         }
         key={el.name}
+        onClick={() => this.updateProducts()}
       >
         <Link to={`/categories/${el.name}`}> {el.name}</Link>
       </li>
@@ -41,7 +51,6 @@ class Layout extends React.Component<any, any> {
   }
 
   render(): React.ReactNode {
-    console.log("props: ", this.props, "this", this);
     return (
       <>
         <HeaderContainer>
@@ -67,9 +76,11 @@ class Layout extends React.Component<any, any> {
   }
 }
 
+// Redux
+
 function mapStateToProps(state: any, ownProps: any) {
   return {
-    categories: state.categories.data.categories,
+    categories: state.categories.data?.categories,
     smth: ownProps,
   };
 }
@@ -77,6 +88,8 @@ function mapStateToProps(state: any, ownProps: any) {
 function mapDispatchToProps(dispatch: any) {
   return {
     categoriesUpdate: (query: string) => dispatch(fetchCategories(query)),
+    productsUpdate: (query: { query: string; name: string }) =>
+      dispatch(fetchProducts(query)),
   };
 }
 
