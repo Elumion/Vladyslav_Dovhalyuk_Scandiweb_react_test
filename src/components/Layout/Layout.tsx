@@ -6,7 +6,8 @@ import { store } from "../../redux/store";
 import { fetchCategories } from "../../redux/CategoriesReducer";
 import { HeaderContainer } from "./Layout.styles";
 import { JsxElement } from "typescript";
-import { withRouter } from "react-router";
+import { withRouter } from "../../withRouter";
+import { Link } from "react-router-dom";
 
 type PropsLayout = { navsArray: string[] };
 
@@ -27,7 +28,16 @@ class Layout extends React.Component<any, any> {
   componentWillUnmount() {}
 
   renderItems(listArr: { name: string }[]) {
-    return listArr.map((el) => <li key={el.name}>{el.name}</li>);
+    return listArr.map((el) => (
+      <li
+        className={
+          el.name === this.props.params.categoryName ? "active__url" : ""
+        }
+        key={el.name}
+      >
+        <Link to={`/categories/${el.name}`}> {el.name}</Link>
+      </li>
+    ));
   }
 
   render(): React.ReactNode {
