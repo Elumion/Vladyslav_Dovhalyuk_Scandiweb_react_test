@@ -7,6 +7,7 @@ export const HeaderContainer = styled.header`
     display:flex;
     
     padding: 24px 0  0;
+    margin-bottom:80px;
     
     .header__inner-container{
         width:100%;
@@ -20,20 +21,34 @@ export const HeaderContainer = styled.header`
             margin:0;
             list-style:none;
             display:flex;
+            
+            & .active__url a{
+                color:${globalStyles["--c-primary"]};
+                border-bottom:2px solid ${globalStyles["--c-primary"]};
+                padding-bottom:30px;
+
+                }
 
             li{
-                padding: 4px 16px 32px;
                 font-weight:400;
                 font-size:16px;
                 line-height: 120%;
                 text-transform:uppercase;
                 cursor:pointer;
+                a{
+                    padding: 4px 16px 32px;
+                    text-decoration:none;
+                    display:inline-block;
+                    color:inherit;
 
-                &:hover{
-                    color:${globalStyles["--c-primary"]};
-                    border-bottom:1px solid ${globalStyles["--c-primary"]};
-                    padding-bottom:31px;
+                    &:hover{
+                        color:${globalStyles["--c-primary"]};
+                        border-bottom:2px solid ${globalStyles["--c-primary"]};
+                        padding-bottom:30px;
+                    }
                 }
+                
+
             }
         }
 
