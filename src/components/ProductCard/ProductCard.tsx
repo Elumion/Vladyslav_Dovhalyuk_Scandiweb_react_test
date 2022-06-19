@@ -1,5 +1,6 @@
 import React from "react";
 import { ProductCardProps } from "../../@types/ProductCardType";
+import { StyledCard } from "./ProductCard.styles";
 
 class ProductCard extends React.Component<ProductCardProps, any> {
   constructor(props: ProductCardProps) {
@@ -8,9 +9,22 @@ class ProductCard extends React.Component<ProductCardProps, any> {
 
   render(): React.ReactNode {
     return (
-      <li key={this.props.id}>
-        <img src={this.props.gallery[0]} alt={this.props.name} width={100} />
-      </li>
+      <StyledCard key={this.props.id}>
+        <img
+          className="card__img"
+          src={this.props.gallery[0]}
+          alt={this.props.name}
+          width={354}
+          height={330}
+        />
+        <p className="card__text">
+          {this.props.brand} {this.props.name}
+        </p>
+        <p className="card__price">
+          {this.props.prices[0].currency.symbol}
+          {this.props.prices[0].amount}
+        </p>
+      </StyledCard>
     );
   }
 }
