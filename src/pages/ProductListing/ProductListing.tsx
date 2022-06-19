@@ -4,7 +4,7 @@ import { ProductCardProps } from "../../@types/ProductCardType";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { fetchProducts } from "../../redux/ProductsReducer";
 import { withRouter } from "../../withRouter";
-import { CategoryName } from "./ProductsListing.styles";
+import { CardsContainer, CategoryName } from "./ProductsListing.styles";
 import { QUERY_PRODUCTS } from "./query";
 
 class ProductListing extends React.Component<any, any> {
@@ -23,6 +23,7 @@ class ProductListing extends React.Component<any, any> {
   componentWillMount() {}
 
   shouldComponentUpdate() {
+    // if (!this.props.products?.category?.name) return false; //fix any url error
     if (!this.props?.products) return true;
     if (this.props.params.categoryName !== this.props.products.category.name) {
       this.props.productsUpdate({
@@ -35,7 +36,7 @@ class ProductListing extends React.Component<any, any> {
   }
 
   componentDidUpdate() {
-    console.log(this.props.products);
+    console.log(this.props.products.category);
   }
 
   renderPhotos(photosArr: { products: ProductCardProps[] }) {
@@ -60,7 +61,9 @@ class ProductListing extends React.Component<any, any> {
             1
           )}`}
         </CategoryName>
-        <ul>{this.renderPhotos(this.props.products?.category)}</ul>
+        <CardsContainer>
+          {this.renderPhotos(this.props.products?.category)}
+        </CardsContainer>
       </>
     );
   }
