@@ -61,19 +61,21 @@ export const HeaderContainer = styled.header`
 
         .actions__container{
             display:flex;
-            gap:38px;
+            gap:22px;
             align-items:baseline;
             .currency{
-                
+                width:38px;
+                text-align:center;
                 font-size:18px;
                 font-weight:500;
                 line-height: 160%;
                 position:relative;
+                cursor:pointer;
                 &::after{
                     content:"";
                     position:absolute;
                     bottom: 10px;
-                    right: -10px;
+                    right: 0;
                     background-image: url(${arrow});
                     background-repeat:no-repeat;
                     background-size:contain;
