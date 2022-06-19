@@ -1,5 +1,5 @@
 import React from "react";
-import { QUERY_CATEGORIES } from "./query";
+import { QUERY_CATEGORIES, QUERY_CURRENCIES } from "./query";
 import { GQL_URL } from "../../constants";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { store } from "../../redux/store";
@@ -10,6 +10,7 @@ import { withRouter } from "../../withRouter";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../../redux/ProductsReducer";
 import { QUERY_PRODUCTS } from "../../pages/ProductListing/query";
+import axios from "axios";
 
 type PropsLayout = { navsArray: string[] };
 
@@ -23,8 +24,13 @@ class Layout extends React.Component<any, any> {
 
   async componentWillMount() {}
 
-  componentDidMount() {
+  async componentDidMount() {
     this.props.categoriesUpdate(QUERY_CATEGORIES);
+
+    const currencies = await axios.post(GQL_URL, {
+      query: QUERY_CURRENCIES,
+    });
+    console.log(currencies);
   }
 
   updateProducts() {

@@ -5,3 +5,12 @@ export const QUERY_CATEGORIES = `query Categories {
       name
     }
   }`
+
+  export const QUERY_CURRENCIES=`
+  query Currencies{
+    currencies{
+      label
+      symbol
+    }
+  }
+  `
