@@ -81,6 +81,35 @@ export const HeaderContainer = styled.header`
                     background-size:contain;
                     width:6px;
                     height:3px;
+                    
+                }
+
+
+
+                .currencies__list{
+                    display:none;
+                    position:absolute;
+                    left:-7px;
+                    /* display:flex; */
+                    flex-direction:column;
+                    .currency__item{
+                        width:70px;
+                        text-align:left;
+                        padding: 13px 20px;
+                        font-weight: 500;
+                        font-size: 18px;
+                        line-height: 160%;
+                        :hover{
+                            background-color:#EEEEEE;
+                        }
+                    }
+                }
+
+                &.show .currencies__list{
+                    display:flex;
+                }
+                &.show::after{
+                    transform:rotate(180deg) ;
                 }
             }
         }
