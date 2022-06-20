@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 export const CategoryName = styled.h1`
-    margin:0;
+    margin:0 0 103px;
     font-weight:400;
     font-size:42px;
     line-height:67.2px;
