@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { fetchProducts } from "../../redux/ProductsReducer";
 import { QUERY_PRODUCTS } from "../../pages/ProductListing/query";
 import axios from "axios";
+import { CurrencyType } from "../../@types/CurrenciesListType";
 
 type PropsLayout = { navsArray: string[] };
 
@@ -20,6 +21,9 @@ const cart: string = require("../../assets/Empty Cart.svg").default;
 class Layout extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
+    this.state = {
+      currencies: [{ label: null, symbol: null }],
+    };
   }
 
   async componentWillMount() {}
@@ -27,10 +31,11 @@ class Layout extends React.Component<any, any> {
   async componentDidMount() {
     this.props.categoriesUpdate(QUERY_CATEGORIES);
 
-    const currencies = await axios.post(GQL_URL, {
+    const currenciesData = await axios.post(GQL_URL, {
       query: QUERY_CURRENCIES,
     });
-    console.log(currencies);
+    console.log(currenciesData.data.data);
+    this.setState({ currencies: currenciesData.data.data.currencies });
   }
 
   updateProducts() {
@@ -56,6 +61,19 @@ class Layout extends React.Component<any, any> {
     ));
   }
 
+  renderCurrencies(currenciesArr: CurrencyType[]) {
+    console.log(currenciesArr);
+    return currenciesArr.map((el) => (
+      <li key={el.label} className="currency__item">
+        {el.symbol} {el.label}
+      </li>
+    ));
+  }
+
+  toggleShowList(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    e.currentTarget.classList.toggle("show");
+  }
+
   render(): React.ReactNode {
     return (
       <>
@@ -69,7 +87,12 @@ class Layout extends React.Component<any, any> {
             </nav>
             <img className="logo" src={logo} alt="logo" />
             <div className="actions__container">
-              <div className="currency">$</div>
+              <div onClick={(e) => this.toggleShowList(e)} className="currency">
+                $
+                <ul className="currencies__list">
+                  {this.renderCurrencies(this.state.currencies)}
+                </ul>
+              </div>
               <div>
                 <img src={cart} alt="cart" />
               </div>
