@@ -2,6 +2,8 @@ import React from "react";
 import { ProductCardProps } from "../../@types/ProductCardType";
 import { StyledCard } from "./ProductCard.styles";
 
+const cart: string = require("../../assets/Empty Cart White.svg").default;
+
 class ProductCard extends React.Component<ProductCardProps, any> {
   constructor(props: ProductCardProps) {
     super(props);
@@ -22,6 +24,11 @@ class ProductCard extends React.Component<ProductCardProps, any> {
             width={354}
             height={330}
           />
+          {this.props.inStock && (
+            <div className="add-to-cart">
+              <img className="add-to-cart__img" src={cart} alt="add-to-cart" />
+            </div>
+          )}
         </div>
         <p className="card__text">
           {this.props.brand} {this.props.name}
