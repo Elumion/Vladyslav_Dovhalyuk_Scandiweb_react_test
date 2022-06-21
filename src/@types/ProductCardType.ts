@@ -11,4 +11,12 @@ export type ProductCardProps = {
       amount: number;
     }[];
     brand: string;
+    selectedPrice?:{
+      currency: {
+        label: string;
+        symbol: string;
+    };
+    amount: number;
+    },
+    currency?:{label:string,symbol:string}
   };
