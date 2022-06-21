@@ -15,15 +15,18 @@ class ProductListing extends React.Component<any, any> {
       query: QUERY_PRODUCTS,
       name: this.props.params.categoryName,
     });
+    this.state = {
+      shouldUpdate: false,
+      selectedPrice: this.props.currency,
+    };
   }
-  componentDidMount() {
-    // console.log(this.props, this.state);
-  }
+  componentDidUpdate() {}
 
   componentWillMount() {}
 
   shouldComponentUpdate() {
     // if (!this.props.products?.category?.name) return false; //fix any url error
+
     if (!this.props?.products) return true;
     if (this.props.params.categoryName !== this.props.products.category.name) {
       this.props.productsUpdate({
@@ -35,22 +38,34 @@ class ProductListing extends React.Component<any, any> {
     return false;
   }
 
-  componentDidUpdate() {
-    console.log(this.props.products.category);
+  componentWillReceiveProps(receivedProps: any) {
+    if (this.state.selectedPrice !== receivedProps.currency.label) {
+      this.setState({
+        selectedPrice: receivedProps.currency.label,
+      });
+      this.forceUpdate();
+    }
   }
 
   renderPhotos(photosArr: { products: ProductCardProps[] }) {
-    return photosArr?.products?.map((el) => (
-      <ProductCard
-        brand={el.brand}
-        gallery={el.gallery}
-        id={el.id}
-        inStock={el.inStock}
-        name={el.name}
-        prices={el.prices}
-        key={el.id}
-      />
-    ));
+    return photosArr?.products?.map((el) => {
+      const selectedPrice = el.prices.filter(
+        (el) => el.currency.label === this.props.currency.label
+      )[0];
+
+      return (
+        <ProductCard
+          brand={el.brand}
+          gallery={el.gallery}
+          id={el.id}
+          inStock={el.inStock}
+          name={el.name}
+          prices={el.prices}
+          key={el.id}
+          selectedPrice={{ ...selectedPrice }}
+        />
+      );
+    });
   }
 
   render(): React.ReactNode {
@@ -74,6 +89,7 @@ class ProductListing extends React.Component<any, any> {
 function mapStateToProps(state: any, ownProps: any) {
   return {
     products: state.products.data,
+    currency: state.currency.data,
   };
 }
 

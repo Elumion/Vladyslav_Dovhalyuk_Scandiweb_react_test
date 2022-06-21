@@ -21,8 +21,8 @@ class ProductCard extends React.Component<ProductCardProps, any> {
           {this.props.brand} {this.props.name}
         </p>
         <p className="card__price">
-          {this.props.prices[0].currency.symbol}
-          {this.props.prices[0].amount}
+          {this.props.selectedPrice?.currency.symbol}
+          {this.props.selectedPrice?.amount}
         </p>
       </StyledCard>
     );
