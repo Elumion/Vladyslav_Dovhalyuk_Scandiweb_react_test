@@ -11,3 +11,14 @@ export type ProductCardProps = {
     currency?:CurrencyType
   };
 
+  export type AttributeType ={
+    id:string;
+    name:string;
+    type:string;
+    items:{
+      displayValue:string;
+      value:string;
+      id:string;
+    }[]
+  }
+
