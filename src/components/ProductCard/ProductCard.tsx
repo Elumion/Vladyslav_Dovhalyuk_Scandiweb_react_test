@@ -1,5 +1,5 @@
 import React from "react";
-import { ProductCardProps } from "../../@types/ProductCardType";
+import { ProductCardProps } from "../../@types/ProductTypes";
 import { StyledCard } from "./ProductCard.styles";
 
 const cart: string = require("../../assets/Empty Cart White.svg").default;

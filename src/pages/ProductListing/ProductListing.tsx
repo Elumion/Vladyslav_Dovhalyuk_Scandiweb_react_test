@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { ProductCardProps } from "../../@types/ProductCardType";
+import { ProductCardProps } from "../../@types/ProductTypes";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import { fetchProducts } from "../../redux/ProductsReducer";
 import { withRouter } from "../../withRouter";
