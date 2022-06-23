@@ -15,10 +15,14 @@ export type ProductCardProps = {
     id:string;
     name:string;
     type:string;
-    items:{
+    items:ItemsToAttributeType[]
+  }
+
+  export type ItemsToAttributeType = 
+    {
       displayValue:string;
       value:string;
       id:string;
-    }[]
-  }
+    }
+  
 

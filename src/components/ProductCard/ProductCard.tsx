@@ -1,9 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
-import { AttributeType, ProductCardProps } from "../../@types/ProductTypes";
+import {
+  AttributeType,
+  ItemsToAttributeType,
+  ProductCardProps,
+} from "../../@types/ProductTypes";
 import { GQL_URL } from "../../constants";
-import { addToCart } from "../../redux/CartReducer";
+import { addToCart, selectAttribute } from "../../redux/CartReducer";
 import { StyledCard } from "./ProductCard.styles";
 import { QUERY_PRODUCT } from "./query";
 
@@ -17,6 +21,23 @@ class ProductCard extends React.Component<ProductCardProps & any, any> {
     });
 
     this.props.addProductToCart(response.data.data.product);
+
+    const pureAttributes = response.data.data.product.attributes.map(
+      (el: any) => {
+        return {
+          id: el.id,
+          name: el.name,
+          type: el.type,
+          items: el.items[0],
+        };
+      }
+    );
+    const selectedAttributesObj: {
+      productId: string;
+      attributes: (AttributeType & { items: ItemsToAttributeType })[];
+    } = { productId: this.props.id, attributes: pureAttributes };
+    // console.log(selectedAttributesObj);
+    this.props.selectAttribute(selectedAttributesObj);
     console.log(response.data.data.product);
   }
 
@@ -67,6 +88,10 @@ class ProductCard extends React.Component<ProductCardProps & any, any> {
 function mapDispatchToProps(dispatch: any) {
   return {
     addProductToCart: (productObj: any) => dispatch(addToCart(productObj)),
+    selectAttribute: (productObj: {
+      productId: string;
+      attributes: (AttributeType & { items: ItemsToAttributeType })[];
+    }) => dispatch(selectAttribute(productObj)),
   };
 }
 

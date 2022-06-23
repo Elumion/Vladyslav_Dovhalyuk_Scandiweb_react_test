@@ -114,5 +114,24 @@ export const HeaderContainer = styled.header`
             }
         }
 
+        .cart__layout-container{
+            position:relative;
+            cursor:pointer;
+            .items__count{
+                position:absolute;
+                top: -25%;
+                right: -70%;
+                width:20px;
+                height:20px;
+                text-align:center;
+                border-radius:100%;
+                font-weight:700;
+                font-size:14px;
+                line-height:16px;
+                background-color:#1D1F22;
+                color: #fff;
+            }
+        }
+
     }
 `

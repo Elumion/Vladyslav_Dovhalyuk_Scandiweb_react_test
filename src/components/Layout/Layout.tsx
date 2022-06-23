@@ -111,8 +111,11 @@ class Layout extends React.Component<any, any> {
                   {this.renderCurrencies(this.state.currencies)}
                 </ul>
               </div>
-              <div>
+              <div className="cart__layout-container">
                 <img src={cart} alt="cart" />
+                {this.props.cart.length > 0 && (
+                  <span className="items__count">{this.props.cart.length}</span>
+                )}
               </div>
             </div>
           </div>
@@ -129,6 +132,7 @@ function mapStateToProps(state: any, ownProps: any) {
   return {
     categories: state.categories.data?.categories,
     currency: state.currency,
+    cart: state.cart.data,
   };
 }
 
