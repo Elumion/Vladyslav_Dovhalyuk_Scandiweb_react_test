@@ -8,6 +8,9 @@ export const HeaderContainer = styled.header`
     
     padding: 24px 0  0;
     margin-bottom:80px;
+    z-index: 8;
+    background: #fff;
+    position: relative;
     
     .header__inner-container{
         width:100%;
@@ -89,6 +92,8 @@ export const HeaderContainer = styled.header`
                 .currencies__list{
                     display:none;
                     position:absolute;
+                    z-index: 11;
+                    background-color: #fff;
                     left:-7px;
                     /* display:flex; */
                     flex-direction:column;
