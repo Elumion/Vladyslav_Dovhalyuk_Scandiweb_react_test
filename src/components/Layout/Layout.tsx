@@ -13,6 +13,7 @@ import { QUERY_PRODUCTS } from "../../pages/ProductListing/query";
 import axios from "axios";
 import { CurrencyType } from "../../@types/CurrenciesListType";
 import { selectCurrency } from "../../redux/CurrencyReducer";
+import { ModalCart } from "../ModalCart";
 
 type PropsLayout = { navsArray: string[] };
 
@@ -24,6 +25,7 @@ class Layout extends React.Component<any, any> {
     super(props);
     this.state = {
       currencies: [{ label: null, symbol: null }],
+      showCart: false,
     };
   }
 
@@ -55,7 +57,12 @@ class Layout extends React.Component<any, any> {
           el.name === this.props.params.categoryName ? "active__url" : ""
         }
         key={el.name}
-        onClick={() => this.updateProducts()}
+        onClick={(e: any) => {
+          this.updateProducts();
+          if (this.state.showCart) {
+            this.toggleShowCart(e);
+          }
+        }}
       >
         <Link to={`/categories/${el.name}`}> {el.name}</Link>
       </li>
@@ -92,6 +99,14 @@ class Layout extends React.Component<any, any> {
     e.currentTarget.classList.toggle("show");
   }
 
+  toggleShowCart(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    const root = document.querySelector("#root");
+    const overlay = document.querySelector("#overlay");
+    root?.classList.toggle("hide-scroll");
+    overlay?.classList.toggle("overlay");
+    this.setState({ showCart: !this.state.showCart });
+  }
+
   render(): React.ReactNode {
     return (
       <>
@@ -111,16 +126,25 @@ class Layout extends React.Component<any, any> {
                   {this.renderCurrencies(this.state.currencies)}
                 </ul>
               </div>
-              <div className="cart__layout-container">
+              <div
+                onClick={this.toggleShowCart.bind(this)}
+                className="cart__layout-container"
+              >
                 <img src={cart} alt="cart" />
                 {this.props.cart.length > 0 && (
                   <span className="items__count">{this.props.cart.length}</span>
                 )}
               </div>
+              <ModalCart show={this.state.showCart} close={() => {}} />
             </div>
           </div>
         </HeaderContainer>
-        <main className="container">{this.props.children}</main>;
+        <main className="container">{this.props.children}</main>
+        <div
+          id="overlay"
+          onClick={this.toggleShowCart.bind(this)}
+          className=""
+        ></div>
       </>
     );
   }
