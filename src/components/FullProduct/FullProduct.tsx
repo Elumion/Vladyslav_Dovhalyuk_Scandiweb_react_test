@@ -33,18 +33,14 @@ class FullProduct extends React.Component<Props, any> {
         </div>
         <div className="counter">
           <button
-            className="counter__button"
+            className="counter__button plus"
             onClick={() => this.setState({ count: this.state.count + 1 })}
-          >
-            +
-          </button>
+          ></button>
           {this.state.count}
           <button
-            className="counter__button"
+            className="counter__button minus"
             onClick={() => this.setState({ count: this.state.count - 1 })}
-          >
-            -
-          </button>
+          ></button>
         </div>
         <img
           className="product__image"
