@@ -135,7 +135,10 @@ class Layout extends React.Component<any, any> {
                   <span className="items__count">{this.props.cart.length}</span>
                 )}
               </div>
-              <ModalCart show={this.state.showCart} close={() => {}} />
+              <ModalCart
+                show={this.state.showCart}
+                products={this.props.cart}
+              />
             </div>
           </div>
         </HeaderContainer>
