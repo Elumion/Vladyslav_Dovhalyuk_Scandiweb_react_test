@@ -67,4 +67,20 @@ export const FullProductContainer = styled.li`
             border-color: #fff;
         }            
     }
+
+    .attributes{
+        flex-direction:column;
+    }
+
+    .attribute__item{
+        cursor:default;
+    }
+
+    .buttons{
+        cursor:auto;
+        display:flex;
+        gap :8px;
+        flex-wrap:wrap;
+        align-items:flex-end;
+    }
 `
