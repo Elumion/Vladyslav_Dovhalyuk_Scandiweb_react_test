@@ -8,7 +8,8 @@ export type ProductCardProps = {
     prices: PricesType[];
     brand: string;
     selectedPrice?:PricesType,
-    currency?:CurrencyType
+    currency?:CurrencyType,
+    attributes?:AttributeType[],
   };
 
   export type AttributeType ={
