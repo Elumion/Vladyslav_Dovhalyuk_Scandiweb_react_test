@@ -1,5 +1,6 @@
 import React from "react";
-import { ProductCardProps } from "../../@types/ProductTypes";
+import { AttributeType, ProductCardProps } from "../../@types/ProductTypes";
+import AttributeButton from "../AttributeButton";
 import { FullProductContainer } from "./FullProduct.styles";
 
 interface Props {
@@ -11,6 +12,33 @@ class FullProduct extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
     this.state = { count: 1 };
+  }
+
+  renderAttributes(attributesArr: AttributeType[] | undefined) {
+    console.log(attributesArr);
+
+    if (typeof attributesArr === "undefined") return null;
+    return attributesArr.map((el) => {
+      return (
+        <li key={el.id} className="attributes__item">
+          <p className="attribute__name">{el.name}</p>
+          <ul className="buttons">
+            {el.items.map((item) => (
+              <li className="buttons__item">
+                {" "}
+                <AttributeButton
+                  displayValue={item.displayValue}
+                  isSwatch={el.type === "swatch"}
+                  key={item.id}
+                  value={item.value}
+                  id={item.id}
+                />{" "}
+              </li>
+            ))}
+          </ul>
+        </li>
+      );
+    });
   }
 
   render() {
@@ -30,6 +58,9 @@ class FullProduct extends React.Component<Props, any> {
             {selectedPrice.currency.symbol}
             {selectedPrice.amount}
           </p>
+          <ul className="attributes">
+            {this.renderAttributes(this.props.product.attributes)}
+          </ul>
         </div>
         <div className="counter">
           <button
