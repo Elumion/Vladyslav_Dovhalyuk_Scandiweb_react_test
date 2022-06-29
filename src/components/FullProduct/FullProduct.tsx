@@ -6,6 +6,8 @@ import { FullProductContainer } from "./FullProduct.styles";
 interface Props {
   product: ProductCardProps;
   currency: { label: string | undefined };
+  checkedItems: any;
+  setAttribute: (productId: string, attributes: AttributeType) => void;
 }
 
 class FullProduct extends React.Component<Props, any> {
@@ -14,27 +16,47 @@ class FullProduct extends React.Component<Props, any> {
     this.state = { count: 1 };
   }
 
+  dispatchAttribute(attribute: AttributeType) {
+    // debugger;s
+    this.props.setAttribute(this.props.product.id, attribute);
+  }
+
   renderAttributes(attributesArr: AttributeType[] | undefined) {
     console.log(attributesArr);
 
     if (typeof attributesArr === "undefined") return null;
-    return attributesArr.map((el) => {
+    return attributesArr.map((el, index) => {
+      // debugger;
       return (
         <li key={el.id} className="attributes__item">
-          <p className="attribute__name">{el.name}</p>
+          <p className="attribute__name">{el.name}:</p>
           <ul className="buttons">
-            {el.items.map((item) => (
-              <li className="buttons__item">
-                {" "}
-                <AttributeButton
-                  displayValue={item.displayValue}
-                  isSwatch={el.type === "swatch"}
-                  key={item.id}
-                  value={item.value}
-                  id={item.id}
-                />{" "}
-              </li>
-            ))}
+            {el.items.map((item) => {
+              // debugger;
+              return (
+                <li key={item.id} className="buttons__item">
+                  {" "}
+                  <AttributeButton
+                    parentId={el.id}
+                    parentName={el.name}
+                    parentType={el.type}
+                    setAttribute={(attribute) =>
+                      this.dispatchAttribute(attribute)
+                    }
+                    isChecked={
+                      item.id ===
+                      this.props.checkedItems[this.props.product.id][index]
+                        .items.id
+                    }
+                    displayValue={item.displayValue}
+                    isSwatch={el.type === "swatch"}
+                    key={item.id}
+                    value={item.value}
+                    id={item.id}
+                  />{" "}
+                </li>
+              );
+            })}
           </ul>
         </li>
       );
