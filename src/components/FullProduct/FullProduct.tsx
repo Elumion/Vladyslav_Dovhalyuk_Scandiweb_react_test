@@ -7,13 +7,17 @@ interface Props {
   product: ProductCardProps;
   currency: { label: string | undefined };
   checkedItems: any;
+  count: number | undefined;
   setAttribute: (productId: string, attributes: AttributeType) => void;
+  addProduct: (productId: string) => void;
+  removeProduct: (productId: string) => void;
 }
 
 class FullProduct extends React.Component<Props, any> {
   constructor(props: Props) {
     super(props);
-    this.state = { count: 1 };
+    this.state = {};
+    // debugger;
   }
 
   dispatchAttribute(attribute: AttributeType) {
@@ -22,7 +26,8 @@ class FullProduct extends React.Component<Props, any> {
   }
 
   renderAttributes(attributesArr: AttributeType[] | undefined) {
-    console.log(attributesArr);
+    // debugger;
+    // console.log(attributesArr);
 
     if (typeof attributesArr === "undefined") return null;
     return attributesArr.map((el, index) => {
@@ -62,7 +67,6 @@ class FullProduct extends React.Component<Props, any> {
       );
     });
   }
-
   render() {
     const selectedPrice = this.props.product.prices.filter(
       (el) => el.currency.label === this.props.currency.label
@@ -87,12 +91,12 @@ class FullProduct extends React.Component<Props, any> {
         <div className="counter">
           <button
             className="counter__button plus"
-            onClick={() => this.setState({ count: this.state.count + 1 })}
+            onClick={() => this.props.addProduct(this.props.product.id)}
           ></button>
-          {this.state.count}
+          {this.props.count}
           <button
             className="counter__button minus"
-            onClick={() => this.setState({ count: this.state.count - 1 })}
+            onClick={() => this.props.removeProduct(this.props.product.id)}
           ></button>
         </div>
         <img

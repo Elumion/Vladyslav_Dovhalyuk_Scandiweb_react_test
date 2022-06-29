@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { ProductCardProps } from "../../@types/ProductTypes";
-import { selectAttribute } from "../../redux/CartReducer";
+import {
+  counterProductAdd,
+  counterProductRemove,
+  selectAttribute,
+} from "../../redux/CartReducer";
 import FullProduct from "../FullProduct";
 import { ModalCartContainer } from "./ModalCart.styles";
 
@@ -12,6 +16,8 @@ type Props = {
   currency?: { label: string; symbol: string };
   checkedAttributes?: any;
   setProductAttributes: (productId: string, attributes: any) => void;
+  addProduct: (productId: string) => void;
+  removeProduct: (productId: string) => void;
 };
 
 class ModalCart extends React.Component<Props, {}> {
@@ -21,6 +27,7 @@ class ModalCart extends React.Component<Props, {}> {
 
   renderProducts(products: ProductCardProps[]): React.ReactNode {
     return this.props.products.map((product: ProductCardProps) => {
+      // debugger;
       return (
         <FullProduct
           setAttribute={this.props.setProductAttributes}
@@ -28,6 +35,9 @@ class ModalCart extends React.Component<Props, {}> {
           currency={{ label: this.props.currency?.label }}
           product={product}
           key={product.id}
+          addProduct={this.props.addProduct}
+          removeProduct={this.props.removeProduct}
+          count={product.count}
         />
       );
     });
@@ -59,6 +69,12 @@ function MapDispatchToProps(dispatch: any) {
   return {
     setProductAttributes: (productId: string, attributes: any) => {
       dispatch(selectAttribute({ productId, attributes }));
+    },
+    addProduct: (productId: string) => {
+      dispatch(counterProductAdd(productId));
+    },
+    removeProduct: (productId: string) => {
+      dispatch(counterProductRemove(productId));
     },
   };
 }
