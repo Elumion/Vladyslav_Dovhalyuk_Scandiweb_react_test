@@ -6,10 +6,11 @@ const cartSlice = createSlice({
     initialState:{data:[],selectedAttributes:{}},
     reducers:{
         addToCart:(state:any, action:any)=>{
-            const idProduct = action.payload.id;
-            if(state.data.some((el:any)=>el.id ===idProduct))return
-            
-            state.data = [...state.data, action.payload];
+            const product = action.payload;
+            const idProduct = product.id;
+            if(state.data.some((el:any)=>el.id ===idProduct)){return}
+            product.count = 1;
+            state.data = [...state.data, product];
         },
         selectAttribute(state:any,action:any){
             // debugger;
@@ -38,10 +39,43 @@ const cartSlice = createSlice({
             
             state.selectedAttributes[selectedAttributes.productId][indexItem].items = settedAttributeItem;
             // debugger;
-
+        },
+        counterProductAdd(state:any,action:any){
+            const idProduct = action.payload;
+            const data = JSON.parse(JSON.stringify(state.data))
+            let indexItem:any;
+            const product = data.filter((el:any,index:number)=>{
+                if(el.id === idProduct){
+                    indexItem = index;
+                    return true;
+                }
+            })[0];
+            data[indexItem].count += 1;
+            state.data = data;
+        },
+        counterProductRemove(state:any,action:any){
+            const idProduct = action.payload;
+            const data = JSON.parse(JSON.stringify(state.data));
+            const selectedAttributes = JSON.parse(JSON.stringify(state.selectedAttributes));
+            let indexItem:any;
+            const product = data.filter((el:any,index:number)=>{
+                if(el.id === idProduct){
+                    indexItem = index;
+                    return true;
+                }
+            })[0];
+            if(data[indexItem].count === 1){
+                data.splice(indexItem,1);
+                delete selectedAttributes[idProduct];
+            }
+            else{
+                data[indexItem].count -= 1;
+            }
+            
+            state.data = data;
         }
     }
 });
 
-export const {addToCart,selectAttribute} = cartSlice.actions;
+export const {addToCart,selectAttribute,counterProductAdd, counterProductRemove} = cartSlice.actions;
 export const cartReducer = cartSlice.reducer;
