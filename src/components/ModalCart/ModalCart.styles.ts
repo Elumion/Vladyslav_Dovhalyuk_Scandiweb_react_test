@@ -15,6 +15,7 @@ export const ModalCartContainer = styled.div`
     .bag{
         font-size:16px;
         line-height:25px;
+        font-weight: 500;
         margin: 0;
     }
      .bold-text{

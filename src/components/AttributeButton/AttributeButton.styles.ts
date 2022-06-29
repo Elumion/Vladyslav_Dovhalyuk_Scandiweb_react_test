@@ -17,7 +17,7 @@ export const AttributeButtonContainer = styled.div`
         border-radius:0;
         transition: background-color 100ms ease-in-out, color 100ms ease-in-out;
 
-        :hover{
+        :hover, &.checked{
             background-color: #1D1F22;
             color:#fff;
         }
@@ -29,7 +29,6 @@ export const AttributeButtonContainer = styled.div`
         width: 16px;
         height: 16px;
         background-color: ${(props:any) => props.itemProp};
-        outline: ${props=>props.itemProp === "#FFFFFF"? "1px solid #1D1F22": "none"};
 
         :hover, &.checked{
             outline: 1px solid #5ECE7B;

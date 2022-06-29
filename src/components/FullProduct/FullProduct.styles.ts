@@ -33,6 +33,7 @@ export const FullProductContainer = styled.li`
         display:flex;
         flex-direction:column;
         justify-content:space-between;
+        align-items: center;
 
         button{
             cursor:pointer;
@@ -58,6 +59,8 @@ export const FullProductContainer = styled.li`
             transform: translate(-50%, -50%);
             width:8px;
             border: 1px solid #1D1F22;
+            border-radius: 1px;
+            background-color: #1D1F22;
         }
         .plus::after {
             transform: translate(-50%,-50%) rotate(90deg);
@@ -65,6 +68,8 @@ export const FullProductContainer = styled.li`
 
         .minus:hover::after, .plus:hover::before,.plus:hover::after {
             border-color: #fff;
+            background-color: #fff;
+
         }            
     }
 
@@ -73,13 +78,19 @@ export const FullProductContainer = styled.li`
     }
 
     .attribute__item{
+        cursor:default !important;
+    }
+
+    .attribute__name{
+        margin:8px 0;
         cursor:default;
     }
 
     .buttons{
         cursor:auto;
+        padding:3px !important;
         display:flex;
-        gap :8px;
+        gap :5px;
         flex-wrap:wrap;
         align-items:flex-end;
     }

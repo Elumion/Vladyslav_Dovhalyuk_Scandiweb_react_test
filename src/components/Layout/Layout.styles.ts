@@ -37,7 +37,7 @@ export const HeaderContainer = styled.header`
                 font-size:16px;
                 line-height: 120%;
                 text-transform:uppercase;
-                cursor:pointer;
+                /* cursor:pointer; */
                 a{
                     padding: 4px 16px 32px;
                     text-decoration:none;
