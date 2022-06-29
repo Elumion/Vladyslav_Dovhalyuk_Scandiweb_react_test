@@ -10,6 +10,7 @@ export type ProductCardProps = {
     selectedPrice?:PricesType,
     currency?:CurrencyType,
     attributes?:AttributeType[],
+    count?:number
   };
 
   export type AttributeType ={
@@ -25,5 +26,4 @@ export type ProductCardProps = {
       value:string;
       id:string;
     }
-  
 
