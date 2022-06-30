@@ -30,6 +30,7 @@ export const FullProductContainer = styled.li`
     }
     .counter{
         margin:0 8px 0 4px;
+        padding: 2px 0;
         display:flex;
         flex-direction:column;
         justify-content:space-between;
@@ -84,6 +85,7 @@ export const FullProductContainer = styled.li`
     .attribute__name{
         margin:8px 0;
         cursor:default;
+        text-transform:none;
     }
 
     .buttons{
