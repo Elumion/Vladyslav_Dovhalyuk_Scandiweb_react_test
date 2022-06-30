@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import {default as globalStyles} from "../../globalStyles.json";
 
 export const ModalCartContainer = styled.div`
     display: flex;
@@ -11,12 +12,30 @@ export const ModalCartContainer = styled.div`
     z-index:10;
     
 
+    .minicart__total{
+        display:flex;
+        justify-content:space-between;
+        margin-top:32px;
+
+        .total__text{
+            font-family: "Roboto", "Raleway", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 18px;
+        }
+
+        .total__price{
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 160%;
+        }
+    }
 
     .bag{
         font-size:16px;
         line-height:25px;
         font-weight: 500;
-        margin: 0;
+        margin: 0 0 32px;
     }
      .bold-text{
         font-weight:700;
@@ -45,6 +64,34 @@ export const ModalCartContainer = styled.div`
             background-color: #f1f1f1;
             border: 1px solid #f1f1f1;
             transform: rotate(180deg);
+        }
+    }
+
+    .minicart__links{
+        display:flex;
+        justify-content:space-between;
+        margin-top:32px;
+    }
+    .minicart__link{
+        color: #1D1F22;
+        text-decoration: none;
+        text-transform:uppercase;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 120%;
+        width:140px;
+        height:43px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background-color:#fff;
+        border:1px solid #1D1F22;
+        transition:background-color 0.1s ease-in-out, border 0.1s ease-in-out, color 0.1s ease-in-out;
+
+        :hover{
+            background-color:${globalStyles["--c-primary"]};
+            color:#fff;
+            border:1px solid ${globalStyles["--c-primary"]};
         }
     }
     `
