@@ -4,13 +4,16 @@ export const AttributeButtonContainer = styled.div`
     cursor:pointer;
 
     &.text{
+        display: flex;
+        align-items: center;
+        justify-content: center;
         padding:0 4px;
-        min-width:24px;
-        min-height:24px;
+        min-width: ${(props)=>props.property === "full"? "63px" :"24px" };
+        min-height:${(props)=>props.property === "full"? "45px" :"24px" };
         background-color: #fff;
         color:#1D1F22;
         font-weight: 400;
-        font-size: 14px;
+        font-size: ${(props)=>props.property === "full"? "16px" :"14px" };
         line-height: 160%;
         text-align:center;
         border: 1px solid #1D1F22;
@@ -26,8 +29,8 @@ export const AttributeButtonContainer = styled.div`
     &.swatch{
         line-height:1;
         padding:0;
-        width: 16px;
-        height: 16px;
+        width: ${(props)=>props.property === "full"? "32px" :"16px" };
+        height: ${(props)=>props.property === "full"? "32px" :"16px" };
         background-color: ${(props:any) => props.itemProp};
 
         :hover, &.checked{
@@ -37,3 +40,5 @@ export const AttributeButtonContainer = styled.div`
 
     }
 `
+
+//props.property: full | small

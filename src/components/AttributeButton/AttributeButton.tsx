@@ -11,6 +11,7 @@ interface Props {
   parentId: string;
   parentName: string;
   parentType: string;
+  isFullSize?: boolean;
   setAttribute: (attribute: AttributeType) => void;
 }
 
@@ -24,7 +25,8 @@ class AttributeButton extends React.Component<Props, {}> {
   defineClassName() {
     const typeAttribute = this.props.isSwatch ? "swatch" : "text";
     const checkedAttribute = this.props.isChecked ? "checked" : "";
-    return `${typeAttribute} ${checkedAttribute}`;
+    const bigSize = this.props.isFullSize ? "big" : "";
+    return `${typeAttribute} ${checkedAttribute} ${bigSize}`;
   }
 
   checkAttribute(attribute: Props) {
@@ -49,6 +51,7 @@ class AttributeButton extends React.Component<Props, {}> {
         onClick={this.checkAttribute.bind(this, this.props)}
         className={this.defineClassName()}
         itemProp={this.props.value}
+        property={this.props.isFullSize ? "full" : "small"}
       >
         {!this.props.isSwatch && this.props.value}
       </AttributeButtonContainer>
