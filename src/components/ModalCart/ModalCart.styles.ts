@@ -5,6 +5,7 @@ export const ModalCartContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 32px 16px;
+    min-width:325px;
     background-color: #fff;
     position:absolute;
     top:100%;
@@ -69,8 +70,9 @@ export const ModalCartContainer = styled.div`
 
     .minicart__links{
         display:flex;
-        justify-content:space-between;
+        justify-content:center;
         margin-top:32px;
+        gap:12px;
     }
     .minicart__link{
         color: #1D1F22;
@@ -79,7 +81,7 @@ export const ModalCartContainer = styled.div`
         font-weight: 600;
         font-size: 14px;
         line-height: 120%;
-        width:140px;
+        width:100%;
         height:43px;
         display:flex;
         align-items:center;
