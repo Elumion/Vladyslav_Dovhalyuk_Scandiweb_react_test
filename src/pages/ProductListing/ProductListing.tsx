@@ -26,9 +26,9 @@ class ProductListing extends React.Component<any, any> {
 
   shouldComponentUpdate() {
     // if (!this.props.products?.category?.name) return false; //fix any url error
-
+    // debugger;
     if (!this.props?.products) return true;
-    if (this.props.params.categoryName !== this.props.products.category.name) {
+    if (this.props.params.categoryName !== this.props.products.category?.name) {
       this.props.productsUpdate({
         query: QUERY_PRODUCTS,
         name: this.props.params.categoryName,

@@ -6,6 +6,7 @@ const cartSlice = createSlice({
     initialState:{data:[],selectedAttributes:{}},
     reducers:{
         addToCart:(state:any, action:any)=>{
+            // debugger;
             const product = action.payload;
             const idProduct = product.id;
             if(state.data.some((el:any)=>el.id ===idProduct)){return}
@@ -26,7 +27,7 @@ const cartSlice = createSlice({
                 return;
             }
             
-            
+            // debugger;
             let indexItem:any;
             const settedAttribute = product.attributes?.filter((el:AttributeType,index:number)=>{
                 if(el.id === (selectedAttributes as any).attributes.id){
