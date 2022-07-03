@@ -27,3 +27,15 @@ export type ProductCardProps = {
       id:string;
     }
 
+  export type ProductDescriptionType = {
+    brand: string;
+    id:string;
+    category?:string;
+    description?:string;
+    inStock:boolean;
+    name:string;
+    gallery:string[];
+    attributes:AttributeType[];
+    prices:PricesType[];
+  } 
+
