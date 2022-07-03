@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
+import { ProductDescription } from "./pages/ProductDescription";
 import { ProductListing } from "./pages/ProductListing";
 
 class App extends Component<any, any> {
@@ -26,6 +27,14 @@ class App extends Component<any, any> {
             element={
               <Layout>
                 <ProductListing />
+              </Layout>
+            }
+          ></Route>
+          <Route
+            path="/product/:productId"
+            element={
+              <Layout>
+                <ProductDescription />
               </Layout>
             }
           ></Route>
