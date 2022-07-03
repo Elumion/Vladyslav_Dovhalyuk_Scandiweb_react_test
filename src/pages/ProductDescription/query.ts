@@ -1,0 +1,30 @@
+export const QUERY_PRODUCT_DESCRIPTION = `
+query($id:String!){
+    product(id:$id){
+      id
+      name
+      inStock
+      gallery
+      description
+      category
+      attributes{
+        id
+        name
+        type
+          items{
+          displayValue
+          value
+          id
+        }
+      }
+      prices{
+        currency{
+          label
+          symbol
+        }
+        amount
+      }
+      brand
+    }
+  }
+`
