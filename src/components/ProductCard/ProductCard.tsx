@@ -37,9 +37,7 @@ class ProductCard extends React.Component<ProductCardProps & any, any> {
       productId: string;
       attributes: (AttributeType & { items: ItemsToAttributeType })[];
     } = { productId: this.props.id, attributes: pureAttributes };
-    // console.log(selectedAttributesObj);
     this.props.selectAttribute(selectedAttributesObj);
-    console.log(response.data.data.product);
   }
 
   render(): React.ReactNode {

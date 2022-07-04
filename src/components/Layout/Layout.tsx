@@ -37,7 +37,6 @@ class Layout extends React.Component<any, any> {
     const currenciesData = await axios.post(GQL_URL, {
       query: QUERY_CURRENCIES,
     });
-    console.log(currenciesData.data.data);
     this.setState({ currencies: currenciesData.data.data.currencies });
   }
 
@@ -74,7 +73,6 @@ class Layout extends React.Component<any, any> {
   }
 
   renderCurrencies(currenciesArr: CurrencyType[]) {
-    console.log(currenciesArr);
     return currenciesArr.map((el) => (
       <li
         key={el.label}

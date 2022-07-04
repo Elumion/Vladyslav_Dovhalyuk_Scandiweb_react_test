@@ -57,7 +57,6 @@ class ProductDescription extends React.Component<
   }
 
   componentDidMount() {
-    console.log(1);
     axios
       .post(GQL_URL, {
         query: QUERY_PRODUCT_DESCRIPTION,
@@ -66,7 +65,6 @@ class ProductDescription extends React.Component<
         },
       })
       .then((response: any) => {
-        console.log(response.data.data.product);
         this.setState({
           product: response.data.data.product,
           selectedImg: response.data.data.product.gallery[0],

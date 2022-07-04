@@ -32,7 +32,6 @@ class FullProduct extends React.Component<Props, any> {
 
   renderAttributes(attributesArr: AttributeType[] | undefined) {
     // debugger;
-    // console.log(attributesArr);
 
     if (typeof attributesArr === "undefined") return null;
     return attributesArr.map((el, index) => {
