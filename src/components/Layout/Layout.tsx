@@ -60,7 +60,7 @@ class Layout extends React.Component<any, any> {
         onClick={(e: any) => {
           this.updateProducts();
           if (this.state.showCart) {
-            this.toggleShowCart(e);
+            this.toggleShowCart();
           }
         }}
       >
@@ -99,7 +99,7 @@ class Layout extends React.Component<any, any> {
     e.currentTarget.classList.toggle("show");
   }
 
-  toggleShowCart(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+  toggleShowCart() {
     const root = document.querySelector("#root");
     const overlay = document.querySelector("#overlay");
     root?.classList.toggle("hide-scroll");
@@ -136,6 +136,7 @@ class Layout extends React.Component<any, any> {
                 )}
               </div>
               <ModalCart
+                toggleShow={this.toggleShowCart.bind(this)}
                 show={this.state.showCart}
                 products={this.props.cart}
               />

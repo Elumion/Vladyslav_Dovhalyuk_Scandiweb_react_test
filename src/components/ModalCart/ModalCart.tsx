@@ -19,6 +19,7 @@ type Props = {
   setProductAttributes: (productId: string, attributes: any) => void;
   addProduct: (productId: string) => void;
   removeProduct: (productId: string) => void;
+  toggleShow: () => void;
 };
 
 class ModalCart extends React.Component<Props, {}> {
@@ -80,10 +81,18 @@ class ModalCart extends React.Component<Props, {}> {
           </p>
         </div>
         <div className="minicart__links">
-          <Link to={"party"} className="minicart__link">
+          <Link
+            to={"/cart"}
+            className="minicart__link"
+            onClick={this.props.toggleShow}
+          >
             View bag
           </Link>
-          <Link to={"check-out-page"} className="minicart__link">
+          <Link
+            to={"check-out-page"}
+            className="minicart__link"
+            onClick={this.props.toggleShow}
+          >
             CHECK OUT
           </Link>
         </div>
