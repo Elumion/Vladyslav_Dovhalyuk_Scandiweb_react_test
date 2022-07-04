@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
+import { Cart } from "./pages/Cart";
 import { ProductDescription } from "./pages/ProductDescription";
 import { ProductListing } from "./pages/ProductListing";
 
@@ -35,6 +36,14 @@ class App extends Component<any, any> {
             element={
               <Layout>
                 <ProductDescription />
+              </Layout>
+            }
+          ></Route>
+          <Route
+            path="/cart"
+            element={
+              <Layout>
+                <Cart />
               </Layout>
             }
           ></Route>
