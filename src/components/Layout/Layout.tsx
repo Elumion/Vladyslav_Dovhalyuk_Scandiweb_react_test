@@ -15,6 +15,7 @@ import { CurrencyType } from "../../@types/CurrenciesListType";
 import { selectCurrency } from "../../redux/CurrencyReducer";
 import { ModalCart } from "../ModalCart";
 import { ProductCardProps } from "../../@types/ProductTypes";
+import ReactDOM from "react-dom";
 
 type PropsLayout = { navsArray: string[] };
 
@@ -22,12 +23,14 @@ const logo: string = require("../../assets/header_logo.svg").default;
 const cart: string = require("../../assets/Empty Cart.svg").default;
 
 class Layout extends React.Component<any, any> {
+  overlay: React.RefObject<any>;
   constructor(props: any) {
     super(props);
     this.state = {
       currencies: [{ label: null, symbol: null }],
       showCart: false,
     };
+    this.overlay = React.createRef();
   }
 
   async componentDidMount() {
@@ -97,10 +100,11 @@ class Layout extends React.Component<any, any> {
   }
 
   toggleShowCart() {
+    // debugger;
     const root = document.querySelector("#root");
-    const overlay = document.querySelector("#overlay");
+    const overlay = ReactDOM.findDOMNode(this.overlay.current);
     root?.classList.toggle("hide-scroll");
-    overlay?.classList.toggle("overlay");
+    (overlay as Element)?.classList.toggle("overlay");
     this.setState({ showCart: !this.state.showCart });
   }
 
@@ -148,6 +152,7 @@ class Layout extends React.Component<any, any> {
         </HeaderContainer>
         <main className="container">{this.props.children}</main>
         <div
+          ref={this.overlay}
           id="overlay"
           onClick={this.toggleShowCart.bind(this)}
           className=""
