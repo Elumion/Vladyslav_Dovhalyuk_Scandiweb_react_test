@@ -14,6 +14,7 @@ import axios from "axios";
 import { CurrencyType } from "../../@types/CurrenciesListType";
 import { selectCurrency } from "../../redux/CurrencyReducer";
 import { ModalCart } from "../ModalCart";
+import { ProductCardProps } from "../../@types/ProductTypes";
 
 type PropsLayout = { navsArray: string[] };
 
@@ -128,7 +129,13 @@ class Layout extends React.Component<any, any> {
               >
                 <img src={cart} alt="cart" />
                 {this.props.cart.length > 0 && (
-                  <span className="items__count">{this.props.cart.length}</span>
+                  <span className="items__count">
+                    {this.props.cart.reduce(
+                      (acc: number, el: ProductCardProps) =>
+                        acc + (el.count ? el.count : 0),
+                      0
+                    )}
+                  </span>
                 )}
               </div>
               <ModalCart
