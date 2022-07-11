@@ -7,6 +7,10 @@ export const StyledCard = styled.li`
     &:hover .add-to-cart{
             opacity:1;
         }
+
+    &:hover{
+        box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+    }
     .out-of-stock__sheet{
         position:absolute;
         background-color:#fff;
