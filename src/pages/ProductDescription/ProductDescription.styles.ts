@@ -110,6 +110,7 @@ export const ProductDescriptionContainer = styled.div`
             background-color: #e6e6e6 !important;
             color: #8c8c8c !important;
             border:1px solid #e6e6e6 !important;
+            cursor:default;
         }
     }
 

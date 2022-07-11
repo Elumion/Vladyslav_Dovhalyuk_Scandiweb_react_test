@@ -80,11 +80,6 @@ class ProductDescription extends React.Component<
               }),
           },
         });
-
-        const description = document.querySelector("#descriptionHTML");
-        if (description) {
-          description.innerHTML = response.data.data.product.description;
-        }
       });
   }
 
@@ -195,9 +190,16 @@ class ProductDescription extends React.Component<
               this.addToCart(this.state.product);
             }}
           >
-            ADD TO CART
+            {this.state.product.inStock ? "ADD TO CART" : "OUT OF STOCK"}
           </button>
-          <div id="descriptionHTML"></div>
+          <div
+            id="descriptionHTML"
+            dangerouslySetInnerHTML={{
+              __html: this.state.product.description
+                ? this.state.product.description
+                : "",
+            }}
+          ></div>
         </div>
       </ProductDescriptionContainer>
     );
