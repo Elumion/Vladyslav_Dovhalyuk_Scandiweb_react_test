@@ -97,6 +97,7 @@ export const HeaderContainer = styled.header`
                     left:-7px;
                     /* display:flex; */
                     flex-direction:column;
+                    filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
                     .currency__item{
                         width:70px;
                         text-align:left;
