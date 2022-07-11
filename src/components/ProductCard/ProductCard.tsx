@@ -7,6 +7,7 @@ import {
   ItemsToAttributeType,
   ProductCardProps,
 } from "../../@types/ProductTypes";
+import { PricesType } from "../../@types/CurrenciesListType";
 import { GQL_URL } from "../../constants";
 import { addToCart, selectAttribute } from "../../redux/CartReducer";
 import { StyledCard } from "./ProductCard.styles";
@@ -40,6 +41,14 @@ class ProductCard extends React.Component<ProductCardProps & any, any> {
     this.props.selectAttribute(selectedAttributesObj);
   }
 
+  renderPrice() {
+    const selectedPrice = this.props.prices.filter(
+      (el: PricesType) => el.currency.label === this.props.currency.label
+    )[0];
+    // debugger;
+    return `${selectedPrice.currency.symbol} ${selectedPrice.amount}`;
+  }
+
   render(): React.ReactNode {
     return (
       <StyledCard key={this.props.id}>
@@ -60,10 +69,7 @@ class ProductCard extends React.Component<ProductCardProps & any, any> {
           <p className="card__text">
             {this.props.brand} {this.props.name}
           </p>
-          <p className="card__price">
-            {this.props.selectedPrice?.currency.symbol}
-            {this.props.selectedPrice?.amount}
-          </p>
+          <p className="card__price">{this.renderPrice()}</p>
         </Link>
         {this.props.inStock && (
           <span
@@ -80,11 +86,11 @@ class ProductCard extends React.Component<ProductCardProps & any, any> {
 }
 
 //redux
-// function mapStateToProps(state: any, ownProps: any){
-//   return {
-//     cart:
-//   };
-// }
+function mapStateToProps(state: any, ownProps: any) {
+  return {
+    currency: state.currency.data,
+  };
+}
 
 function mapDispatchToProps(dispatch: any) {
   return {
@@ -96,4 +102,4 @@ function mapDispatchToProps(dispatch: any) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(ProductCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

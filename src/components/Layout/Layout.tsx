@@ -29,8 +29,6 @@ class Layout extends React.Component<any, any> {
     };
   }
 
-  async componentWillMount() {}
-
   async componentDidMount() {
     this.props.categoriesUpdate(QUERY_CATEGORIES);
 

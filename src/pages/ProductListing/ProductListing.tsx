@@ -20,9 +20,6 @@ class ProductListing extends React.Component<any, any> {
       selectedPrice: this.props.currency,
     };
   }
-  componentDidUpdate() {}
-
-  componentWillMount() {}
 
   shouldComponentUpdate() {
     // if (!this.props.products?.category?.name) return false; //fix any url error
@@ -38,21 +35,8 @@ class ProductListing extends React.Component<any, any> {
     return false;
   }
 
-  componentWillReceiveProps(receivedProps: any) {
-    if (this.state.selectedPrice !== receivedProps.currency.label) {
-      this.setState({
-        selectedPrice: receivedProps.currency.label,
-      });
-      this.forceUpdate();
-    }
-  }
-
   renderPhotos(photosArr: { products: ProductCardProps[] }) {
     return photosArr?.products?.map((el) => {
-      const selectedPrice = el.prices.filter(
-        (el) => el.currency.label === this.props.currency.label
-      )[0];
-
       return (
         <ProductCard
           brand={el.brand}
@@ -62,7 +46,7 @@ class ProductListing extends React.Component<any, any> {
           name={el.name}
           prices={el.prices}
           key={el.id}
-          selectedPrice={{ ...selectedPrice }}
+          selectedPrice={this.props.currency}
         />
       );
     });

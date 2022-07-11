@@ -6,6 +6,11 @@ export const fetchProducts: any = createAsyncThunk<any>(
   async (queryObj:any, { rejectWithValue }) =>{
     try {
         const axios = require("axios").default;
+
+        if(!queryObj.name){
+            rejectWithValue("No name provided");
+            return null;
+        }
         const response = await axios.post(GQL_URL, {
             query: queryObj.query,
             variables:{ name: {"title":queryObj.name}}
