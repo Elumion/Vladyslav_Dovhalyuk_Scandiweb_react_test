@@ -136,15 +136,18 @@ class FullProduct extends React.Component<Props, any> {
               className="product__image"
               src={this.state.selectedImg}
               alt={this.state.selectedImg}
+              width={121}
             />
-            <div className="slider-btns__container">
-              <button className="slider__btn" onClick={this.setPrevimg}>
-                <img className="arrow__rotate" src={arrow} alt={arrow} />
-              </button>
-              <button className="slider__btn" onClick={this.setNextimg}>
-                <img src={arrow} alt={arrow} />
-              </button>
-            </div>
+            {this.props.product.gallery.length > 1 && (
+              <div className="slider-btns__container">
+                <button className="slider__btn" onClick={this.setPrevimg}>
+                  <img className="arrow__rotate" src={arrow} alt={arrow} />
+                </button>
+                <button className="slider__btn" onClick={this.setNextimg}>
+                  <img src={arrow} alt={arrow} />
+                </button>
+              </div>
+            )}
           </div>
         )}
       </FullProductContainer>
