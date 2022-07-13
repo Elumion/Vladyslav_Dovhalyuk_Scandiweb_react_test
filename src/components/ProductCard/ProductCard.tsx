@@ -6,6 +6,7 @@ import {
   AttributeType,
   ItemsToAttributeType,
   ProductCardProps,
+  SelectedAttributesType,
 } from "../../@types/ProductTypes";
 import { PricesType } from "../../@types/CurrenciesListType";
 import { GQL_URL } from "../../constants";
@@ -22,23 +23,37 @@ class ProductCard extends React.Component<ProductCardProps & any, any> {
       variables: { id: id },
     });
 
-    this.props.addProductToCart(response.data.data.product);
+    const selectedProduct: ProductCardProps = response.data.data.product;
+    const selectedAttributes: SelectedAttributesType[] | null =
+      selectedProduct.attributes
+        ? selectedProduct.attributes.map((el) => {
+            return {
+              id: el.id,
+              name: el.name,
+              type: el.type,
+              items: el.items[0],
+            };
+          })
+        : null;
 
-    const pureAttributes = response.data.data.product.attributes.map(
-      (el: any) => {
-        return {
-          id: el.id,
-          name: el.name,
-          type: el.type,
-          items: el.items[0],
-        };
-      }
-    );
-    const selectedAttributesObj: {
-      productId: string;
-      attributes: (AttributeType & { items: ItemsToAttributeType })[];
-    } = { productId: this.props.id, attributes: pureAttributes };
-    this.props.selectAttribute(selectedAttributesObj);
+    selectedProduct.sellectedAttributes = selectedAttributes;
+    this.props.addProductToCart(selectedProduct);
+
+    // const pureAttributes = response.data.data.product.attributes.map(
+    //   (el: any) => {
+    //     return {
+    //       id: el.id,
+    //       name: el.name,
+    //       type: el.type,
+    //       items: el.items[0],
+    //     };
+    //   }
+    // );
+    // const selectedAttributesObj: {
+    //   productId: string;
+    //   attributes: (AttributeType & { items: ItemsToAttributeType })[];
+    // } = { productId: this.props.id, attributes: pureAttributes };
+    // this.props.selectAttribute(selectedAttributesObj);
   }
 
   renderPrice() {

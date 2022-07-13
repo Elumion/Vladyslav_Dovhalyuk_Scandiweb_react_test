@@ -127,7 +127,6 @@ class ProductDescription extends React.Component<
     const tmpObject = { ...product };
     delete tmpObject.description;
     delete tmpObject.category;
-    this.props.addProductToCart(tmpObject);
 
     const selectedAttributesObj: {
       productId: string;
@@ -136,9 +135,14 @@ class ProductDescription extends React.Component<
       productId: this.state.product.id,
       attributes: this.state.selectedAttributes[this.state.product.id],
     };
+
+    tmpObject.sellectedAttributes = selectedAttributesObj.attributes;
+
+    this.props.addProductToCart(tmpObject);
+
     // debugger;
 
-    this.props.selectAttribute(selectedAttributesObj);
+    // this.props.selectAttribute(selectedAttributesObj);
   }
 
   render() {
