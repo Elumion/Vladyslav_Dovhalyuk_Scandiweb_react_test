@@ -10,8 +10,17 @@ export type ProductCardProps = {
     selectedPrice?:PricesType,
     currency?:CurrencyType,
     attributes?:AttributeType[],
-    count?:number
+    count?:number,
+    sellectedAttributes?:SelectedAttributesType[] |null
   };
+
+  export type SelectedAttributesType ={
+    id:string;
+    name:string;
+    type:string;
+    items:ItemsToAttributeType
+  }
+
 
   export type AttributeType ={
     id:string;
@@ -37,5 +46,6 @@ export type ProductCardProps = {
     gallery:string[];
     attributes:AttributeType[];
     prices:PricesType[];
+    sellectedAttributes?:SelectedAttributesType[] |null
   } 
 
