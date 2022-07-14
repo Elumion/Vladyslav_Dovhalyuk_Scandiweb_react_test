@@ -12,6 +12,7 @@ export type ProductCardProps = {
     attributes?:AttributeType[],
     count?:number,
     sellectedAttributes?:SelectedAttributesType[] |null
+    storeId?:string;
   };
 
   export type SelectedAttributesType ={
