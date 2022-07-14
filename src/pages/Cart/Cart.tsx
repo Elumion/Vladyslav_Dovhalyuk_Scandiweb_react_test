@@ -49,10 +49,10 @@ class Cart extends React.Component<Props, {}> {
           return (
             <FullProduct
               setAttribute={this.props.setProductAttributes}
-              checkedItems={this.props.checkedAttributes}
+              checkedItems={product.sellectedAttributes}
               currency={{ label: this.props.currency?.label }}
               product={product}
-              key={product.id}
+              key={product.storeId}
               addProduct={this.props.addProduct}
               removeProduct={this.props.removeProduct}
               count={product.count}

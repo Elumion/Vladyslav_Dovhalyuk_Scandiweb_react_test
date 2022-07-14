@@ -12,7 +12,7 @@ import { ModalCartContainer } from "./ModalCart.styles";
 
 type Props = {
   show: boolean;
-  products: ProductCardProps[];
+  products: (ProductCardProps & { storeId: string })[];
   children?: JSX.Element | JSX.Element[] | string;
   currency?: { label: string; symbol: string };
   checkedAttributes?: any;
@@ -27,16 +27,18 @@ class ModalCart extends React.Component<Props, {}> {
     super(props);
   }
 
-  renderProducts(products: ProductCardProps[]): React.ReactNode {
-    return this.props.products.map((product: ProductCardProps) => {
+  renderProducts(
+    products: (ProductCardProps & { storeId: string })[]
+  ): React.ReactNode {
+    return products.map((product) => {
       // debugger;
       return (
         <FullProduct
           setAttribute={this.props.setProductAttributes}
-          checkedItems={this.props.checkedAttributes}
+          checkedItems={product.sellectedAttributes}
           currency={{ label: this.props.currency?.label }}
           product={product}
-          key={product.id}
+          key={product.storeId}
           addProduct={this.props.addProduct}
           removeProduct={this.props.removeProduct}
           count={product.count}

@@ -27,7 +27,8 @@ class FullProduct extends React.Component<Props, any> {
 
   dispatchAttribute(attribute: AttributeType) {
     // debugger;s
-    this.props.setAttribute(this.props.product.id, attribute);
+    if (this.props.product.storeId)
+      this.props.setAttribute(this.props.product.storeId, attribute);
   }
 
   renderAttributes(attributesArr: AttributeType[] | undefined) {
@@ -53,9 +54,7 @@ class FullProduct extends React.Component<Props, any> {
                       this.dispatchAttribute(attribute)
                     }
                     isChecked={
-                      item.id ===
-                      this.props.checkedItems[this.props.product.id][index]
-                        .items.id
+                      item.id === this.props.checkedItems[index].items.id
                     }
                     displayValue={item.displayValue}
                     isSwatch={el.type === "swatch"}
@@ -115,12 +114,20 @@ class FullProduct extends React.Component<Props, any> {
         <div className="counter">
           <button
             className="counter__button plus"
-            onClick={() => this.props.addProduct(this.props.product.id)}
+            onClick={() =>
+              this.props.addProduct(
+                this.props.product.storeId ? this.props.product.storeId : ""
+              )
+            }
           ></button>
           {this.props.count}
           <button
             className="counter__button minus"
-            onClick={() => this.props.removeProduct(this.props.product.id)}
+            onClick={() =>
+              this.props.removeProduct(
+                this.props.product.storeId ? this.props.product.storeId : ""
+              )
+            }
           ></button>
         </div>
         {!this.props.isFullSize ? (
