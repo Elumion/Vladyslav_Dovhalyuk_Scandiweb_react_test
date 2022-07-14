@@ -22,21 +22,16 @@ class FullProduct extends React.Component<Props, any> {
     this.state = {
       selectedImg: this.props.product.gallery[0],
     };
-    // debugger;
   }
 
   dispatchAttribute(attribute: AttributeType) {
-    // debugger;s
     if (this.props.product.storeId)
       this.props.setAttribute(this.props.product.storeId, attribute);
   }
 
   renderAttributes(attributesArr: AttributeType[] | undefined) {
-    // debugger;
-
     if (typeof attributesArr === "undefined") return null;
     return attributesArr.map((el, index) => {
-      // debugger;
       return (
         <li key={el.id} className="attributes__item">
           <p className="attribute__name">{el.name}:</p>
