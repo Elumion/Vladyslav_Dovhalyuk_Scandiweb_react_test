@@ -68,19 +68,26 @@ class ProductDescription extends React.Component<
         this.setState({
           product: response.data.data.product,
           selectedImg: response.data.data.product.gallery[0],
-          selectedAttributes: {
-            [response.data.data.product.id]:
-              response.data.data.product.attributes.map((el: AttributeType) => {
-                return {
-                  id: el.id,
-                  name: el.name,
-                  type: el.type,
-                  items: [el.items[0]][0],
-                };
-              }),
-          },
+          selectedAttributes: response.data.data.product.attributes.map(
+            (el: AttributeType) => {
+              return {
+                id: el.id,
+                name: el.name,
+                type: el.type,
+                items: [el.items[0]][0],
+              };
+            }
+          ),
         });
       });
+  }
+
+  handldeSetAttribute(obj: any, index: any) {
+    let newObj = { ...this.state.selectedAttributes };
+    let itemsObj = { ...obj.items[0] };
+    newObj[index] = { ...obj };
+    newObj[index].items = { ...itemsObj };
+    this.setState({ selectedAttributes: newObj });
   }
 
   renderAttributes(attributesArr: AttributeType[]) {
@@ -96,23 +103,13 @@ class ProductDescription extends React.Component<
                 value={item.value}
                 isSwatch={el.type === "swatch"}
                 isChecked={
-                  item.id ===
-                  this.state.selectedAttributes[this.state.product.id][index]
-                    .items.id
+                  item.id === this.state.selectedAttributes[index].items.id
                 }
                 parentId={el.id}
                 parentName={el.name}
                 parentType={el.type}
                 setAttribute={(obj) => {
-                  // debugger;
-                  // this.setState({selectedAttributes:{[this.state.product.id][index]:obj}})
-                  let newObj = { ...this.state.selectedAttributes };
-                  let itemsObj = { ...obj.items[0] };
-                  // debugger;
-                  newObj[this.state.product.id][index] = { ...obj };
-                  newObj[this.state.product.id][index].items = { ...itemsObj };
-
-                  this.setState({ selectedAttributes: { ...newObj } });
+                  this.handldeSetAttribute(obj, index);
                 }}
                 isFullSize
               />
@@ -133,7 +130,7 @@ class ProductDescription extends React.Component<
       attributes: (AttributeType & { items: ItemsToAttributeType })[];
     } = {
       productId: this.state.product.id,
-      attributes: this.state.selectedAttributes[this.state.product.id],
+      attributes: this.state.selectedAttributes,
     };
 
     tmpObject.sellectedAttributes = selectedAttributesObj.attributes;
