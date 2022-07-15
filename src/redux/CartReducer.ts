@@ -67,11 +67,26 @@ const cartSlice = createSlice({
                 type,
                 items: items[0]
             }
-            const changeAttributeId:number|undefined = data[productId].sellectedAttributes?.findIndex(el=>el.id === id);
-            if(typeof changeAttributeId === "number" )
-                (data[productId] as any).sellectedAttributes[changeAttributeId] = selectedAttributesArr;
+
+            if(!Array.isArray(data[productId].sellectedAttributes)){
+                const arrayFromAttributesObj = [];
+                for(let key in data[productId].sellectedAttributes){
+                    arrayFromAttributesObj.push((data[productId] as any).sellectedAttributes[key])
+                }
+                data[productId].sellectedAttributes = arrayFromAttributesObj;
+            }
             
-            state.data =data;
+            try{
+
+                const changeAttributeId:number|undefined = data[productId].sellectedAttributes?.findIndex(el=>el.id === id);
+                if(typeof changeAttributeId === "number" )
+                (data[productId] as any).sellectedAttributes[changeAttributeId] = selectedAttributesArr;
+                
+                state.data =data;
+            }
+            catch(e){
+                console.error(e);
+            }
         },
         counterProductAdd(state:any,action:any){
             const idProduct = action.payload;
