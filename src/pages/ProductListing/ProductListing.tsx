@@ -11,10 +11,6 @@ class ProductListing extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
-    this.props.productsUpdate({
-      query: QUERY_PRODUCTS,
-      name: this.props.params.categoryName,
-    });
     this.state = {
       shouldUpdate: false,
       selectedPrice: this.props.currency,
@@ -33,6 +29,13 @@ class ProductListing extends React.Component<any, any> {
       return true;
     }
     return false;
+  }
+
+  componentDidMount() {
+    this.props.productsUpdate({
+      query: QUERY_PRODUCTS,
+      name: this.props.params.categoryName,
+    });
   }
 
   renderPhotos(photosArr: { products: ProductCardProps[] }) {
