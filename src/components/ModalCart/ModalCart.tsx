@@ -25,6 +25,7 @@ type Props = {
 class ModalCart extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
+    this.state = {};
   }
 
   renderProducts(

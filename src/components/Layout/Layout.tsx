@@ -1,11 +1,9 @@
 import React from "react";
 import { QUERY_CATEGORIES, QUERY_CURRENCIES } from "./query";
 import { GQL_URL } from "../../constants";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { store } from "../../redux/store";
+import { connect } from "react-redux";
 import { fetchCategories } from "../../redux/CategoriesReducer";
 import { HeaderContainer } from "./Layout.styles";
-import { JsxElement } from "typescript";
 import { withRouter } from "../../withRouter";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../../redux/ProductsReducer";
@@ -16,8 +14,6 @@ import { selectCurrency } from "../../redux/CurrencyReducer";
 import { ModalCart } from "../ModalCart";
 import { ProductCardProps } from "../../@types/ProductTypes";
 import ReactDOM from "react-dom";
-
-type PropsLayout = { navsArray: string[] };
 
 const logo: string = require("../../assets/header_logo.svg").default;
 const cart: string = require("../../assets/Empty Cart.svg").default;

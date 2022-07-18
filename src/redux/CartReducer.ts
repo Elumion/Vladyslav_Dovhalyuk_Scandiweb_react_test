@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import { AttributeType, ItemsToAttributeType, ProductCardProps, SelectedAttributesType } from "../@types/ProductTypes";
+import { AttributeType, ProductCardProps, SelectedAttributesType } from "../@types/ProductTypes";
 
 const cartSlice = createSlice({
     name:"cart",
@@ -92,12 +92,12 @@ const cartSlice = createSlice({
             const idProduct = action.payload;
             const data = JSON.parse(JSON.stringify(state.data))
             let indexItem:any;
-            const product = data.filter((el:any,index:number)=>{
+            data.foreach((el:any,index:number)=>{
                 if(el.storeId === idProduct){
                     indexItem = index;
                     return true;
                 }
-            })[0];
+            });
             data[indexItem].count += 1;
             state.data = data;
         },
@@ -106,12 +106,12 @@ const cartSlice = createSlice({
             const data = JSON.parse(JSON.stringify(state.data));
             const selectedAttributes = JSON.parse(JSON.stringify(state.selectedAttributes));
             let indexItem:any;
-            const product = data.filter((el:any,index:number)=>{
+            data.foreach((el:any,index:number)=>{
                 if(el.storeId === idProduct){
                     indexItem = index;
                     return true;
                 }
-            })[0];
+            });
             if(data[indexItem].count === 1){
                 data.splice(indexItem,1);
                 delete selectedAttributes[idProduct];
